@@ -4,7 +4,16 @@ Practical configs, scripts, checklists, and references for building a local-firs
 
 ## What's Here
 
-*Coming soon.* This repo will house ready-to-use resources that complement our articles — Home Assistant configs, automation templates, privacy checklists, and more.
+### 🏠 Home Assistant
+
+| Resource | Description |
+|----------|-------------|
+| [Audit Checklist](home-assistant/audit-checklist.md) | Structured checklist for auditing your HA installation — system health, integrations, automations, security, and more. |
+| [Leak Sensor Notifications](home-assistant/leak-sensor-notification.yaml) | Ready-to-use automation for water leak sensors with critical alerts that bypass Do Not Disturb. |
+
+## Related Articles
+
+- [AI Digest #1: Claude Code Meets Home Assistant](https://smarthomedigest.com/articles/ai-digest-1-claude-code-home-assistant-audit) — Using AI to audit and fix a real Home Assistant setup
 
 ## About Smart Home Digest
 

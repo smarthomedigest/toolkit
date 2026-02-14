@@ -1,0 +1,101 @@
+# Leak Sensor Phone Notification Automation
+#
+# Sends an immediate push notification when a water leak sensor detects moisture.
+# Critical for catching leaks early — under sinks, behind toilets, near water heaters.
+#
+# Setup:
+#   1. Replace device_id and entity_id with your leak sensor's IDs
+#      (Settings → Devices → your sensor → copy from URL/entity card)
+#   2. Replace notify.mobile_app_your_phone with your phone's notify service
+#      (Settings → Companion App → check your device name)
+#   3. Copy this into your automations.yaml or paste into the Automation Editor (YAML mode)
+#   4. Duplicate for each leak sensor — one automation per sensor for reliability
+#
+# Why one automation per sensor?
+#   If you group sensors, a YAML typo or misconfiguration disables ALL leak alerts.
+#   Individual automations mean one broken config only affects one sensor.
+#
+# Compatible sensors: Aqara Water Leak (Zigbee), Z-Wave flood sensors,
+#   SmartThings/Samsung leak sensors, or anything that exposes a binary moisture sensor.
+#
+# From Smart Home Digest — https://smarthomedigest.com
+
+# --- Kitchen Sink ---
+- id: "leak_notify_kitchen_sink"
+  alias: "Kitchen Sink Leak Notification"
+  description: "Push notification when kitchen sink leak sensor detects water."
+  triggers:
+    - type: moist
+      device_id: YOUR_DEVICE_ID_HERE
+      entity_id: YOUR_ENTITY_ID_HERE
+      domain: binary_sensor
+      trigger: device
+  conditions: []
+  actions:
+    - action: notify.mobile_app_your_phone
+      data:
+        title: "🚰 Water Leak Detected!"
+        message: "Kitchen sink leak sensor is wet. Check immediately."
+        data:
+          # iOS critical alert — bypasses Do Not Disturb
+          push:
+            sound:
+              name: default
+              critical: 1
+              volume: 1.0
+          # Android high-priority notification
+          priority: high
+          channel: alarm_stream
+  mode: single
+
+# --- Bathroom Toilet ---
+- id: "leak_notify_bathroom_toilet"
+  alias: "Bathroom Toilet Leak Notification"
+  description: "Push notification when bathroom toilet leak sensor detects water."
+  triggers:
+    - type: moist
+      device_id: YOUR_DEVICE_ID_HERE
+      entity_id: YOUR_ENTITY_ID_HERE
+      domain: binary_sensor
+      trigger: device
+  conditions: []
+  actions:
+    - action: notify.mobile_app_your_phone
+      data:
+        title: "🚽 Water Leak Detected!"
+        message: "Bathroom toilet leak sensor is wet. Check immediately."
+        data:
+          push:
+            sound:
+              name: default
+              critical: 1
+              volume: 1.0
+          priority: high
+          channel: alarm_stream
+  mode: single
+
+# --- Water Heater ---
+- id: "leak_notify_water_heater"
+  alias: "Water Heater Leak Notification"
+  description: "Push notification when water heater leak sensor detects water."
+  triggers:
+    - type: moist
+      device_id: YOUR_DEVICE_ID_HERE
+      entity_id: YOUR_ENTITY_ID_HERE
+      domain: binary_sensor
+      trigger: device
+  conditions: []
+  actions:
+    - action: notify.mobile_app_your_phone
+      data:
+        title: "🔥 Water Leak Detected!"
+        message: "Water heater leak sensor is wet. Check immediately."
+        data:
+          push:
+            sound:
+              name: default
+              critical: 1
+              volume: 1.0
+          priority: high
+          channel: alarm_stream
+  mode: single
